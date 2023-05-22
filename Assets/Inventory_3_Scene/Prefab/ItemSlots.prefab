@@ -187,7 +187,7 @@ RectTransform:
   - {fileID: 8569874103212478840}
   - {fileID: 3507322274650889172}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -252,8 +252,15 @@ MonoBehaviour:
   quantityText: {fileID: 6692564227417755137}
   itemImage: {fileID: 484531631999148747}
   itemColor: {r: 1, g: 1, b: 1, a: 1}
+  emptySprite: {fileID: 0}
   selectedShader: {fileID: 3226555460191219168}
   thisItemSelected: 0
+  itemOnePrefab: {fileID: 5934583578820960802, guid: 5da801c7e87c3fd43bf402e79713a669,
+    type: 3}
+  itemTwoPrefab: {fileID: 2650136242980750605, guid: c0c793a209ba58b4cb9d92a12a8dde51,
+    type: 3}
+  itemThreePrefab: {fileID: 6509949416693082091, guid: 68344d9df7eb4f1488661ce360daa7bc,
+    type: 3}
 --- !u!1 &6404683353364069785
 GameObject:
   m_ObjectHideFlags: 0

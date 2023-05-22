@@ -25,6 +25,12 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler
     public GameObject selectedShader;
     public bool thisItemSelected;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject itemOnePrefab;
+    [SerializeField] private GameObject itemTwoPrefab;
+    [SerializeField] private GameObject itemThreePrefab;
+    [SerializeField] private Vector3 prefabOffset = new Vector3(0, 2.0f, 3.0f);
+
     private InventoryManager inventoryManager;
 
     private void Start()
@@ -32,22 +38,22 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler
         inventoryManager = GameObject.Find("GameCanvas").GetComponent<InventoryManager>();
     }
 
-    private void Update() 
+    private void Update()
     {
-        if(thisItemSelected && Input.GetKeyDown(KeyCode.Space))
+        if (thisItemSelected && Input.GetKeyDown(KeyCode.Space))
         {
             inventoryManager.DeselectAllSlots();
             selectedShader.SetActive(false);
-            thisItemSelected = false;  
+            thisItemSelected = false;
         }
     }
     public int AddItem(string _itemName, int _quantity, Sprite _itemSprite)
     {
-        if(isFull)
+        if (isFull)
         {
             return quantity;
         }
-        
+
         this.itemName = _itemName;
         this.itemSprite = _itemSprite;
         itemImage.sprite = _itemSprite;
@@ -55,9 +61,9 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler
 
         itemColor.a = 1.0f;
         itemImage.GetComponent<Image>().color = itemColor;
-        
+
         this.quantity += _quantity;
-        if(this.quantity >= maxNumberOfItem)
+        if (this.quantity >= maxNumberOfItem)
         {
             quantityText.text = maxNumberOfItem.ToString("n0");
             isFull = true;
@@ -81,20 +87,22 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler
         }
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            //Deselect the Slot
-            OnRightClick();
+            //Check if an item is selected
+            //Drops Item
+            if (thisItemSelected)
+                OnRightClick();
         }
     }
 
     private void OnLeftClick()
     {
-        if(thisItemSelected && this.quantity > 0)
+        if (thisItemSelected && this.quantity > 0)
         {
             inventoryManager.UseItem(itemName);
             this.quantity -= 1;
             quantityText.text = this.quantity.ToString();
 
-            if(this.quantity <= 0)
+            if (this.quantity <= 0)
             {
                 EmptySlot();
             }
@@ -107,41 +115,57 @@ public class ItemSlots : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void OnRightClick()
+    {
+        if (this.quantity > 0)
+        {
+            //Create a new object to drop
+            switch (itemName)
+            {
+                case "Potion":
+                    CreateNewItem(itemOnePrefab);
+                    break;
+                case "Sun":
+                    CreateNewItem(itemTwoPrefab);
+                    break;
+                case "Sword":
+                    CreateNewItem(itemThreePrefab);
+                    break;
+                default:
+                    return;
+            }
+
+            //Update the data
+            this.quantity -= 1;
+            quantityText.text = this.quantity.ToString();
+            isFull = false;
+
+            if (quantity <= 0)
+            {
+                EmptySlot();
+            }
+        }
+
+    }
+
+    private void CreateNewItem(GameObject _itemTodrop)
+    {
+        _itemTodrop.transform.position = GameObject.FindWithTag("Player").transform.position + prefabOffset;
+        Instantiate(_itemTodrop, _itemTodrop.transform.position, Quaternion.identity, GameObject.Find("ItemHolder").transform);
+    }
+
     private void EmptySlot()
     {
+        //Clear the data in the slot
         itemName = null;
         quantity = 0;
         itemSprite = null;
         quantityText.text = "";
         itemColor.a = 0f;
+        isFull = false;
         itemImage.GetComponent<Image>().color = itemColor;
         itemImage.sprite = emptySprite;
     }
-
-    public void OnRightClick()
-    {
-        GameObject itemToDrop = new GameObject (itemName);
-        Item_Inventory3 newItem = itemToDrop.AddComponent<Item_Inventory3>();
-        newItem.quantity = 1;
-        newItem.itemName = itemName;
-        newItem.itemSprite = itemSprite;
-
-        SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
-        sr.sprite = itemSprite;
-        sr.sortingOrder = 5;
-
-        itemToDrop.AddComponent<BoxCollider>();
-        itemToDrop.GetComponent<BoxCollider>().isTrigger = true;
-
-        itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(3.0f, 2.0f, 0);
-
-        this.quantity -= 1;
-        quantityText.text = this.quantity.ToString();
-
-        if (this.quantity <= 0)
-        {
-            EmptySlot();
-        }
-
-    }
 }
+    
+

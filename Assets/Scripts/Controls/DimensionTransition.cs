@@ -4,13 +4,13 @@ using UnityEngine.UI;
 public class RenderTextureSwitcher : MonoBehaviour
 {
     [SerializeField] private Camera fPCam;   //first parent camera selectebale
-   [SerializeField] private Camera tDCam;   //Top Down camera selectable
-   [SerializeField] private RawImage smallScreenRawImage;  // RawImage component to display the camera output
+    [SerializeField] private Camera tDCam;   //Top Down camera selectable
+    [SerializeField] private RawImage smallScreenRawImage;  // RawImage component to display the camera output
     [SerializeField] private RawImage largeSCreenRawImage;  // RawImage component to display the camera output
 
-    
 
-   private void Start()
+
+    private void Start()
     {
         // Make sure at least one camera and RawImage are assigned
         if (fPCam == null || tDCam == null)
@@ -25,7 +25,7 @@ public class RenderTextureSwitcher : MonoBehaviour
             Debug.LogError("An image is not assigned");
             return;
 
-        }        
+        }
     }
 
     private void Update()
@@ -33,31 +33,32 @@ public class RenderTextureSwitcher : MonoBehaviour
         // Check for input to switch camera outputs
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            
+
             SwitchScreens();
-                       
+
         }
     }
     private void SwitchScreens()
-        {
-        Debug.Log("small = " + smallScreenRawImage.texture + "Large = " +largeSCreenRawImage.texture +  "\nfpCam = " + fPCam.targetTexture +"tDCam = " + tDCam.targetTexture  );
+    {
+        Debug.Log("small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
 
         //Reassign the target Textures to the other camera.
         fPCam.enabled = false;
         tDCam.enabled = false;
         if (smallScreenRawImage.texture == fPCam.targetTexture)
-        {            
+        {
             smallScreenRawImage.texture = tDCam.targetTexture;
             largeSCreenRawImage.texture = fPCam.targetTexture;
-        } else 
-        {            
+        }
+        else
+        {
             smallScreenRawImage.texture = fPCam.targetTexture;
             largeSCreenRawImage.texture = tDCam.targetTexture;
         }
         fPCam.enabled = true;
         tDCam.enabled = true;
         Debug.Log("AFTER small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
-       
+
 
     }
 }
