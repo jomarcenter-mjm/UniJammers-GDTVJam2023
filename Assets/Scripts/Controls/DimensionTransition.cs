@@ -1,3 +1,4 @@
+using uj.input;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class RenderTextureSwitcher : MonoBehaviour
     [SerializeField] private RawImage largeSCreenRawImage;  // RawImage component to display the camera output
 
 
+    InputReader inputReader;
 
     private void Start()
     {
@@ -26,14 +28,16 @@ public class RenderTextureSwitcher : MonoBehaviour
             return;
 
         }
+
+        inputReader = FindObjectOfType<InputReader>();
+
     }
 
     private void Update()
     {
         // Check for input to switch camera outputs
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (inputReader.GetCameraSwitchPressedThisFrame())
         {
-
             SwitchScreens();
 
         }
@@ -42,7 +46,16 @@ public class RenderTextureSwitcher : MonoBehaviour
     {
         Debug.Log("small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
 
+            SwitchScreens();
+        }
+    }
+
+
+    private void SwitchScreens()
+    {
         //Reassign the target Textures to the other camera.
+
+        //Debug.Log("small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
         fPCam.enabled = false;
         tDCam.enabled = false;
         if (smallScreenRawImage.texture == fPCam.targetTexture)
@@ -57,8 +70,6 @@ public class RenderTextureSwitcher : MonoBehaviour
         }
         fPCam.enabled = true;
         tDCam.enabled = true;
-        Debug.Log("AFTER small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
-
-
+        //Debug.Log("AFTER small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
     }
 }
