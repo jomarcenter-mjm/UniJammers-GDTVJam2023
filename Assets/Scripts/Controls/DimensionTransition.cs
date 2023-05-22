@@ -9,6 +9,7 @@ public class RenderTextureSwitcher : MonoBehaviour
     [SerializeField] private RawImage smallScreenRawImage;  // RawImage component to display the camera output
     [SerializeField] private RawImage largeSCreenRawImage;  // RawImage component to display the camera output
 
+
     InputReader inputReader;
 
     private void Start()
@@ -29,6 +30,7 @@ public class RenderTextureSwitcher : MonoBehaviour
         }
 
         inputReader = FindObjectOfType<InputReader>();
+
     }
 
     private void Update()
@@ -37,8 +39,17 @@ public class RenderTextureSwitcher : MonoBehaviour
         if (inputReader.GetCameraSwitchPressedThisFrame())
         {
             SwitchScreens();
+
         }
     }
+    private void SwitchScreens()
+    {
+        Debug.Log("small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
+
+            SwitchScreens();
+        }
+    }
+
 
     private void SwitchScreens()
     {
