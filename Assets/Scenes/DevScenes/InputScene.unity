@@ -664,7 +664,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.43318874, y: -0.000000015508167, z: 0.000000007453611, w: 0.90130323}
+  m_LocalRotation: {x: 0.43318874, y: 0.000000015508169, z: -0.000000007453612, w: 0.90130323}
   m_LocalPosition: {x: 0, y: 12.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2692,7 +2692,7 @@ PrefabInstance:
     - target: {fileID: 2273021224371724178, guid: d59f05613d43a2240a63cf425758bf74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2273021224371724178, guid: d59f05613d43a2240a63cf425758bf74,
         type: 3}
@@ -3324,7 +3324,7 @@ PrefabInstance:
     - target: {fileID: 2273021224371724178, guid: d59f05613d43a2240a63cf425758bf74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2273021224371724178, guid: d59f05613d43a2240a63cf425758bf74,
         type: 3}
@@ -3619,7 +3619,7 @@ PrefabInstance:
     - target: {fileID: 5817315230844179886, guid: bf8108a5520f396468b953a47e1d856f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5817315230844179886, guid: bf8108a5520f396468b953a47e1d856f,
         type: 3}
@@ -3845,12 +3845,12 @@ PrefabInstance:
     - target: {fileID: 4813888557637141240, guid: bf0c6258140c9a547a753796ca390054,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015508167
+      value: 0.000000015508169
       objectReference: {fileID: 0}
     - target: {fileID: 4813888557637141240, guid: bf0c6258140c9a547a753796ca390054,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000007453611
+      value: -0.000000007453612
       objectReference: {fileID: 0}
     - target: {fileID: 4813888557637141240, guid: bf0c6258140c9a547a753796ca390054,
         type: 3}
