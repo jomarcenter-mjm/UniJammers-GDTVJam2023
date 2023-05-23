@@ -12,9 +12,13 @@ public class EnemyMovement : MonoBehaviour
     private float wobbleTimer = 0f; // Timer for wobbling duration
     private float nextWobbleTime = 0f; // Time for the next wobble
 
+    [SerializeField] private float enemyDamage = 1.0f; //Enemy Damage to Player's Health
+    [SerializeField] private PlayerMovement playerMovement; //Reference PlayerMovement Script 
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player's GameObject by tag
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         originalDirection = (player.position - transform.position).normalized; // Calculate original direction towards the player
         CalculateNextWobbleTime(); // Calculate the time for the next wobble
     }
@@ -56,6 +60,16 @@ public class EnemyMovement : MonoBehaviour
         // Generate a random interval for the next wobble
         float randomInterval = Random.Range(1f, 5f);
         nextWobbleTime = Time.time + randomInterval;
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            //Damage player health
+            playerMovement.TakeDamage(1);
+            Debug.Log("kill");
+        }
     }
 }
 
