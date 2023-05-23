@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         inputReader = FindObjectOfType<InputReader>();
         charController = GetComponent<CharacterController>();
         playerCurrentHealth = playerMaxHealth;
-        playerCurrentLight = playerMaxLight;
+        playerCurrentLight = playerMaxLight; // The light bar is manupulated in the Dimension Transition Script
     }
 
     private void Update()

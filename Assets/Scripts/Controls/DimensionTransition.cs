@@ -4,22 +4,26 @@ using UnityEngine.UI;
 
 public class RenderTextureSwitcher : MonoBehaviour
 {
+    [Header("Screen Switch")]
     [SerializeField] private Camera fPCam;   //first parent camera selectebale
     [SerializeField] private Camera tDCam;   //Top Down camera selectable
     [SerializeField] private RawImage smallScreenRawImage;  // RawImage component to display the camera output
     [SerializeField] private RawImage largeSCreenRawImage;  // RawImage component to display the camera output
+    InputReader inputReader;
+
+    [Header("UI Switch")]
     [SerializeField] private Image rightCameraUI; //Inventory Image Holder
     [SerializeField] private Image lightBar; //LightBar Image Holder
     [SerializeField] private Image healthBar; //HealthBar Image Holder
+    [SerializeField] private PlayerMovement playerMovement;
     private Color color;
     public bool isLightMode;
-    [SerializeField] private PlayerMovement playerMovement;
-
-    InputReader inputReader;
 
     private void Start()
     {
+        //Start in Light Dimension
         isLightMode = true;
+
         // Make sure at least one camera and RawImage are assigned
         if (fPCam == null || tDCam == null)
         {
@@ -36,6 +40,8 @@ public class RenderTextureSwitcher : MonoBehaviour
         }
 
         inputReader = FindObjectOfType<InputReader>();
+
+        //References
         rightCameraUI = GameObject.Find("RightCameraUI").GetComponent<Image>();
         lightBar = GameObject.Find("LightBarFill").GetComponent<Image>();
         healthBar = GameObject.Find("HealthBarFill").GetComponent<Image>();
@@ -104,6 +110,7 @@ public class RenderTextureSwitcher : MonoBehaviour
         }
     }
 
+    // ------- REDUCE CURRENT LIGHT ------- //
     public void LightBar()
     {
         //In Light Dimension & Light is not Full
