@@ -44,6 +44,7 @@ public class RenderTextureSwitcher : MonoBehaviour
 
         }
     }
+
     private void SwitchScreens()
     {
         //Reassign the target Textures to the other camera.
