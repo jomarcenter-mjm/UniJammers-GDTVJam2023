@@ -4035,7 +4035,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 118.64
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4085,7 +4085,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 20
+    maxLights: 212
   TrailModule:
     enabled: 0
     mode: 0
@@ -4994,7 +4994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 5572651666175177290}
-  newEmissionRate: 200
+  newEmissionRate: 300
   newLifetime: 1.2
 --- !u!1 &8526787163174376763
 GameObject:
@@ -5031,7 +5031,7 @@ Transform:
   - {fileID: 8393788969816859298}
   - {fileID: 6644306874628688502}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-9104171922403271826
 MonoBehaviour:
@@ -5048,6 +5048,8 @@ MonoBehaviour:
   movementSpeed: 3
   wobbleDuration: 0.5
   wobbleMagnitude: 1
+  enemyDamage: 1
+  playerMovement: {fileID: 0}
 --- !u!114 &1558445164163082755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,7 +5078,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

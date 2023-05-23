@@ -11,11 +11,17 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
 
     [SerializeField] float moveSpeed = 5;
+    [SerializeField] private float playerMaxHealth = 10.0f;
+    [SerializeField] public float playerCurrentHealth;
+    [SerializeField] private float playerMaxLight= 10.0f;
+    [SerializeField] public float playerCurrentLight;
 
     private void Start()
     {
         inputReader = FindObjectOfType<InputReader>();
         charController = GetComponent<CharacterController>();
+        playerCurrentHealth = playerMaxHealth;
+        playerCurrentLight = playerMaxLight;
     }
 
     private void Update()
@@ -25,4 +31,14 @@ public class PlayerMovement : MonoBehaviour
 
         charController.Move(moveSpeed * Time.deltaTime * movement);
     }
+
+    public void TakeDamage(float damage)
+    {
+        //Deals Damage to Player
+        playerCurrentHealth -= damage;
+    }
+
+
+
+    
 }
