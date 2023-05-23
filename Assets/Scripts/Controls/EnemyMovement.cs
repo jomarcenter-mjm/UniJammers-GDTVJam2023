@@ -73,3 +73,53 @@ public class EnemyMovement : MonoBehaviour
     }
 }
 
+/*using UnityEngine;
+
+public class EnemyCollision : MonoBehaviour
+{
+    public int playerDamageAmount = 10;
+    public int enemyDamageAmount = 20;
+    public float pushForce = 10f;
+    public float pushDuration = 1f;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Apply damage to the player
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(playerDamageAmount);
+            }
+
+            // Apply damage to the enemy
+            EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(enemyDamageAmount);
+            }
+
+            // Push the enemy away
+            Rigidbody enemyRigidbody = GetComponent<Rigidbody>();
+            if (enemyRigidbody != null)
+            {
+                Vector3 pushDirection = transform.position - collision.transform.position;
+                pushDirection.Normalize();
+                enemyRigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+
+                // Disable enemy movement temporarily
+                StartCoroutine(DisableEnemyMovement());
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator DisableEnemyMovement()
+    {
+        yield return new WaitForSeconds(pushDuration);
+
+        // Enable enemy movement after push duration
+        // Add any necessary code here to re-enable enemy movement
+    }
+}
+*/

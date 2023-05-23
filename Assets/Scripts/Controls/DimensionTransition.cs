@@ -9,6 +9,8 @@ public class RenderTextureSwitcher : MonoBehaviour
     [SerializeField] private Camera tDCam;   //Top Down camera selectable
     [SerializeField] private RawImage smallScreenRawImage;  // RawImage component to display the camera output
     [SerializeField] private RawImage largeSCreenRawImage;  // RawImage component to display the camera output
+    private bool isDull = false;
+
     InputReader inputReader;
 
     [Header("UI Switch")]
@@ -59,15 +61,14 @@ public class RenderTextureSwitcher : MonoBehaviour
             SwitchUI();
         }
     }
-    
+
     private void SwitchScreens()
     {
         //Reassign the target Textures to the other camera.
-
-        //Debug.Log("small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
+        
         fPCam.enabled = false;
         tDCam.enabled = false;
-        if (smallScreenRawImage.texture == fPCam.targetTexture)
+        if (!isDull)
         {
             isLightMode = false;
             smallScreenRawImage.texture = tDCam.targetTexture;
@@ -79,6 +80,8 @@ public class RenderTextureSwitcher : MonoBehaviour
             smallScreenRawImage.texture = fPCam.targetTexture;
             largeSCreenRawImage.texture = tDCam.targetTexture;
         }
+
+        toggleIsDull();
         fPCam.enabled = true;
         tDCam.enabled = true;
         //Debug.Log("AFTER small = " + smallScreenRawImage.texture + "Large = " + largeSCreenRawImage.texture + "\nfpCam = " + fPCam.targetTexture + "tDCam = " + tDCam.targetTexture);
@@ -132,6 +135,15 @@ public class RenderTextureSwitcher : MonoBehaviour
             largeSCreenRawImage.texture = tDCam.targetTexture;
             isLightMode = true;
         }
+
+    public  bool getIsDull()
+    {
+        return isDull;
+    }
+    private void toggleIsDull()
+    {
+        isDull= !isDull;
+
     }
 }
 

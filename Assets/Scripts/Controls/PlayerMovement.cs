@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     InputReader inputReader;
     CharacterController charController;
+    private bool isFirstPlay = false;
 
     Vector2 moveInput;
 
