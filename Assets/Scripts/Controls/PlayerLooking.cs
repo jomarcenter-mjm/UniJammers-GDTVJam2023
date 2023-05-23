@@ -8,7 +8,7 @@ public class PlayerLooking : MonoBehaviour
 
   InputReader inputReader;
 
-  Camera cameraController;
+  public Camera cameraController;
 
   Vector2 lookInput;
 
@@ -16,8 +16,7 @@ public class PlayerLooking : MonoBehaviour
   // Start is called before the first frame update
   void Start()
     {
-    inputReader = FindObjectOfType<InputReader>();
-    cameraController = FindObjectOfType<Camera>(); 
+    inputReader = FindObjectOfType<InputReader>(); 
   }
 
     // Update is called once per frame
