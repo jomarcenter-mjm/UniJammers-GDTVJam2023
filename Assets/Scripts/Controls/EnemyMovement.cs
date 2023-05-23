@@ -12,9 +12,13 @@ public class EnemyMovement : MonoBehaviour
     private float wobbleTimer = 0f; // Timer for wobbling duration
     private float nextWobbleTime = 0f; // Time for the next wobble
 
+    [SerializeField] private float enemyDamage = 1.0f; //Enemy Damage to Player's Health
+    [SerializeField] private PlayerMovement playerMovement; //Reference PlayerMovement Script 
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player's GameObject by tag
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         originalDirection = (player.position - transform.position).normalized; // Calculate original direction towards the player
         CalculateNextWobbleTime(); // Calculate the time for the next wobble
     }
@@ -57,5 +61,65 @@ public class EnemyMovement : MonoBehaviour
         float randomInterval = Random.Range(1f, 5f);
         nextWobbleTime = Time.time + randomInterval;
     }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            //Damage player health
+            playerMovement.TakeDamage(1);
+            Debug.Log("kill");
+        }
+    }
 }
 
+/*using UnityEngine;
+
+public class EnemyCollision : MonoBehaviour
+{
+    public int playerDamageAmount = 10;
+    public int enemyDamageAmount = 20;
+    public float pushForce = 10f;
+    public float pushDuration = 1f;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Apply damage to the player
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(playerDamageAmount);
+            }
+
+            // Apply damage to the enemy
+            EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(enemyDamageAmount);
+            }
+
+            // Push the enemy away
+            Rigidbody enemyRigidbody = GetComponent<Rigidbody>();
+            if (enemyRigidbody != null)
+            {
+                Vector3 pushDirection = transform.position - collision.transform.position;
+                pushDirection.Normalize();
+                enemyRigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+
+                // Disable enemy movement temporarily
+                StartCoroutine(DisableEnemyMovement());
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator DisableEnemyMovement()
+    {
+        yield return new WaitForSeconds(pushDuration);
+
+        // Enable enemy movement after push duration
+        // Add any necessary code here to re-enable enemy movement
+    }
+}
+*/

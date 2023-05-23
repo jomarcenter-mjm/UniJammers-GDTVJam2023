@@ -1,3 +1,4 @@
+using System;
 using uj.input.actions;
 using UnityEngine;
 
@@ -26,6 +27,17 @@ namespace uj.input
         public Vector2 GetLookInput()
         {
             return inputActions.Player.Look.ReadValue<Vector2>();
+
+        }
+
+        public bool GetCameraSwitchPressedThisFrame()
+        {
+            return inputActions.Player.SwitchCamera.WasPressedThisFrame();
+        }
+
+        public bool GetPauseButtonPressed()
+        {
+            return inputActions.Player.PauseGame.WasPerformedThisFrame();
         }
     }
 }

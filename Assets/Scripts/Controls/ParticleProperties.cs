@@ -25,10 +25,17 @@ public class ParticleProperties : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
+         //   Debug.Log("Currentrate" + emissionModule.rateOverTime.constant);
             newEmissionRate -= 25f;
             newLifetime -= .1f;
+            float rate =emissionModule.rateOverTime.constant; 
             emissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(newEmissionRate);
             mainModule.startLifetime = new ParticleSystem.MinMaxCurve(newLifetime);
+            if(emissionModule.rateOverTime.constant <=0)
+            {
+                Debug.Log("Enemy has died!");
+                Destroy(gameObject);
+            }
         }
         
     }
